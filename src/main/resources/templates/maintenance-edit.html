@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Mantenimiento de películas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script type="text/javascript">
+        function confirmUpdate(event) {
+            var confirmation = confirm("¿Estás seguro de que deseas actualizar los datos?");
+            if (!confirmation) {
+                event.preventDefault(); // Previene el envío del formulario si el usuario cancela
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="mt-3 mb-3">
+        <h3>Editar película</h3>
+    </div>
+
+    <form th:object="${film}" th:action="@{/maintenance/edit-confirm}" method="post" onsubmit="confirmUpdate(event)">
+
+        <div class="mb-3 row">
+            <label for="filmId" class="col-sm-3">Código</label>
+            <div class="col-sm-9">
+                <input type="text" id="filmId" th:field="*{filmId}" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="title" class="col-sm-3">Título</label>
+            <div class="col-sm-9">
+                <input type="text" id="title" th:field="*{title}" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="description" class="col-sm-3">Descripción</label>
+            <div class="col-sm-9">
+                <input type="text" id="description" th:field="*{description}" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="releaseYear" class="col-sm-3">Año de filmación</label>
+            <div class="col-sm-9">
+                <input type="text" id="releaseYear" th:field="*{releaseYear}" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="rentalDuration" class="col-sm-3">Tiempo de alquiler (Días)</label>
+            <div class="col-sm-9">
+                <input type="text" id="rentalDuration" th:field="*{rentalDuration}" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="rentalRate" class="col-sm-3">Precio de alquiler (USD)</label>
+            <div class="col-sm-9">
+                <input type="text" id="rentalRate" th:field="*{rentalRate}" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="length" class="col-sm-3">Duración de la película (Minutos)</label>
+            <div class="col-sm-9">
+                <input type="text" id="length" th:field="*{length}" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="replacementCost" class="col-sm-3">Costo de reemplazo (USD)</label>
+            <div class="col-sm-9">
+                <input type="text" id="replacementCost" th:field="*{replacementCost}" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="rating" class="col-sm-3">Categoría</label>
+            <div class="col-sm-9">
+                <select id="rating" th:field="*{rating}" class="form-control">
+                    <option value="" disabled selected>Seleccione una categoría</option>
+                    <option value="G">G</option>
+                    <option value="PG-13">PG-13</option>
+                    <option value="PG">PG</option>
+                    <option value="R">R</option>
+                    <option value="NC-17">NC-17</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="specialFeatures" class="col-sm-3">Características de la película</label>
+            <div class="col-sm-9">
+                <select id="specialFeatures" th:field="*{specialFeatures}" class="form-control" multiple>
+                    <option value="Trailers">Trailers</option>
+                    <option value="Commentaries">Commentaries</option>
+                    <option value="Deleted Scenes">Deleted Scenes</option>
+                    <option value="Behind the Scenes">Behind the Scenes</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="btnEdit" class="col-sm-3"></label>
+            <div class="col-sm-9">
+                <button type="submit" id="btnEdit" class="btn btn-primary w-25">
+                    Actualizar
+                </button>
+                <button type="button" id="btnCancel" class="btn btn-secondary w-25"
+                        onclick="location.href='/maintenance/start'">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
